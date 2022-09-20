@@ -1,7 +1,5 @@
 package com.example.githubapp.model.source.remote
 
-import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(

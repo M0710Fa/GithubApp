@@ -1,11 +1,10 @@
 package com.example.githubapp.main
 
-import android.accounts.NetworkErrorException
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubapp.model.repository.UserRepository
+import com.example.githubapp.model.repository.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,6 +30,7 @@ class MainViewModel @Inject constructor(
     //検索フォームの入力文字
     val searchQuery: MutableState<String> = mutableStateOf("")
 
+    val userDetail = mutableStateOf(User(UserId(0),"", ImageUrl(""), HtmlUrl("")))
 
     fun onSearchTapped(){
         val searchQuery = searchQuery.value
@@ -38,7 +38,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             uiState.value = UiState.Loading
             try {
-                userRepository.getUser(userName = searchQuery)
+                userDetail.value = userRepository.getUser(userName = searchQuery)
                 uiState.value = UiState.Success
             }catch (e: Exception){
                 uiState.value = UiState.Failure
