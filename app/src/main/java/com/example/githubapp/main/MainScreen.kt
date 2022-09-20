@@ -1,9 +1,6 @@
 package com.example.githubapp.main
 
-import android.widget.SearchView
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
@@ -11,16 +8,22 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
+fun MainScreen(
+    mainViewModel: MainViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier
+) {
     val uiState by mainViewModel.uiState
     val user by mainViewModel.userDetail
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = CenterHorizontally) {
         SearchView(
             searchQuery = mainViewModel.searchQuery,
             onSearchButtonTapped = { mainViewModel.onSearchTapped() }
@@ -45,9 +48,13 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
 @Composable
 fun SearchView(
     searchQuery: MutableState<String>,
-    onSearchButtonTapped: () -> Unit
+    onSearchButtonTapped: () -> Unit,
+    modifier: Modifier = Modifier
 ){
-  Row() {
+  Row(
+      horizontalArrangement = Arrangement.Center,
+      modifier = modifier.padding(16.dp)
+  ) {
       TextField(
           label = { Text(text = "Githubアカウントを入力")},
           value = searchQuery.value,
@@ -57,7 +64,10 @@ fun SearchView(
       Button(
           onClick = {
               onSearchButtonTapped()
-          }
+          },
+          modifier = Modifier
+              .align(CenterVertically)
+              .padding(4.dp)
       ) {
           Text(text = "検索")
       }
@@ -71,7 +81,9 @@ fun InitialView(){
 
 @Composable
 fun LoadingView(){
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         CircularProgressIndicator()
         Text(text = "読み込み中")
     }
