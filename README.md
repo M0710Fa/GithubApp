@@ -1,4 +1,4 @@
-# Practice DI with Jetpack Compose with Hilt
+# Practice DI with Jetpack Compose by Hilt
 
 ## Purpose
 - for practice DI and Hilt
