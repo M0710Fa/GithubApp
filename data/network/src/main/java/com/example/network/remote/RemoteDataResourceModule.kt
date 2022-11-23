@@ -1,4 +1,4 @@
-package com.example.githubapp.model.source.remote
+package com.example.network.remote
 
 import dagger.Module
 import dagger.Provides
@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class RemoteDataResourceModule{
     @Provides
-    fun provideRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl): RemoteDataSource{
+    fun provideRemoteDataSource(remoteDataSourceImpl: RemoteDataSourceImpl): RemoteDataSource {
         return remoteDataSourceImpl
     }
 }

@@ -1,4 +1,4 @@
-package com.example.githubapp.model.source.remote
+package com.example.network.remote
 
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.githubapp.model.source.remote
+package com.example.network.remote
 
 import dagger.Module
 import dagger.Provides
@@ -12,7 +12,7 @@ class GithubServiceModule {
 
     @Provides
     @Singleton
-    fun provideGithubService(githubServiceProvider: GithubServiceProvider): GithubService{
+    fun provideGithubService(githubServiceProvider: GithubServiceProvider): GithubService {
         return githubServiceProvider.createGithubService()
     }
 }
